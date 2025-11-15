@@ -53,13 +53,11 @@ This system analyzes competitive pricing dynamics, market positioning, and deman
 ## Project Structure
 
 ```
-Pricing-and-market-analysis-system/
+competitive-pricing-intelligence-system/
 │
-├── data/                          # Processed datasets
+├── data/                          # Processed datasets (empty - excluded from git)
 ├── notebooks/                     # Jupyter notebooks for exploration
-│   ├── 01_data_exploration.ipynb
-│   ├── 02_pricing_analysis.ipynb
-│   └── 03_demand_modeling.ipynb
+├── outputs/                       # Generated reports and visualizations
 │
 ├── src/                           # Source code
 │   ├── utils/                     # Helper functions
@@ -73,22 +71,20 @@ Pricing-and-market-analysis-system/
 │   │   ├── clustering.py          # Product clustering
 │   │   └── opportunities.py       # Opportunity detection
 │   │
-│   └── models/                    # ML models
-│       ├── elasticity.py          # Price elasticity
-│       └── recommender.py         # Pricing recommendations
+│   └── models/                    # Statistical models
+│       └── elasticity.py          # Price elasticity estimation
 │
 ├── dashboard/                     # Streamlit dashboard
 │   ├── app.py                     # Main dashboard
-│   ├── pages/                     # Dashboard pages
-│   │   ├── 1_pricing_intel.py
-│   │   ├── 2_demand_analysis.py
-│   │   └── 3_opportunities.py
-│   └── utils.py                   # Dashboard utilities
-│
-├── outputs/                       # Generated reports and visualizations
+│   └── pages/                     # Dashboard pages
+│       ├── 1_Pricing_Intelligence.py
+│       ├── 2_Demand_Analysis.py
+│       ├── 3_Market_Opportunities.py
+│       └── 4_Price_Elasticity.py
 │
 ├── download_dataset.py            # Dataset downloader
 ├── requirements.txt               # Dependencies
+├── .gitignore                     # Git ignore rules
 └── README.md                      # This file
 ```
 
@@ -111,12 +107,11 @@ python download_dataset.py
 
 ### 3. **Run Analysis**
 ```bash
-# Explore with Jupyter notebooks
-jupyter notebook notebooks/
-
-# Or run the dashboard
+# Run the interactive dashboard
 streamlit run dashboard/app.py
 ```
+
+The dashboard will open at `http://localhost:8501`
 
 ---
 
@@ -174,7 +169,7 @@ from src.models.elasticity import ElasticityModel
 
 model = ElasticityModel(df)
 elasticity = model.estimate_price_elasticity()
-optimal_price = model.recommend_optimal_price(product_id)
+optimal_price = model.find_revenue_maximizing_price(base_price=1000, elasticity=-1.5)
 ```
 
 ---
@@ -216,22 +211,35 @@ streamlit run dashboard/app.py
 ## Technologies Used
 
 - **Data Processing:** pandas, NumPy
-- **ML & Modeling:** scikit-learn, XGBoost, statsmodels
-- **NLP:** sentence-transformers, NLTK
+- **Statistical Analysis:** SciPy, statsmodels
+- **Clustering:** scikit-learn (KMeans)
+- **NLP:** NLTK (TF-IDF for product similarity)
 - **Visualization:** Plotly, Seaborn, Matplotlib
 - **Dashboard:** Streamlit
-- **Statistical Analysis:** SciPy, statsmodels
+- **Data Download:** kagglehub
 
 ---
 
 ## Future Enhancements
 
-- [ ] Real-time competitor price tracking
-- [ ] Sentiment analysis from product reviews
-- [ ] Time-series forecasting for seasonal trends
+### Data & Analysis
+- [ ] Jupyter notebooks for exploratory data analysis
+- [ ] Time-series forecasting for seasonal trends (requires historical data)
+- [ ] Customer segmentation using RFM analysis (requires customer data)
+- [ ] Sentiment analysis from product reviews (requires review text data)
+
+### Advanced Features
+- [ ] Real-time competitor price tracking API
 - [ ] Multi-platform price comparison (Amazon, Flipkart, etc.)
+- [ ] Automated pricing recommendation engine
 - [ ] A/B testing simulator for pricing strategies
-- [ ] API for pricing recommendations
+- [ ] Profitability analysis (requires cost data)
+
+### Machine Learning
+- [ ] Predictive models for demand forecasting
+- [ ] Dynamic pricing algorithms
+- [ ] Churn prediction models (requires customer behavior data)
+- [ ] Product recommendation system
 
 ---
 
@@ -249,9 +257,9 @@ streamlit run dashboard/app.py
 
 Built as a comprehensive competitive intelligence project showcasing:
 - Data analysis & visualization
-- Machine learning & modeling
+- Statistical modeling (price elasticity, correlation analysis)
 - Business analytics & strategy
-- Dashboard development
+- Interactive dashboard development
 
 ---
 
